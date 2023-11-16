@@ -109,8 +109,8 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-outline-dark btn-lg py-3 "
-                                        onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                    <button class="btn btn-outline-dark btn-lg py-3 mb-2"
+                                        onclick="window.location='checkout.html'">Checkout</button>
                                 </div>
                             </div>
                         </div>

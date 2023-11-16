@@ -6,5 +6,9 @@
         <script src="{{ asset('bootstrap5/js/bootstrap.bundle.min.js') }}"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('home/js/scripts.js') }}"></script>
+        <!-- SweetAlert -->
+        <script src="{{ asset('function/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+        {{-- myPersonal function  --}}
+        <script src="{{ asset('function/function.js') }}"></script>
     </body>
 </html>

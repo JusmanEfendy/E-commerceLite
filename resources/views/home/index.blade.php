@@ -1,7 +1,11 @@
 <title>{{ $title }}</title>
 
 @include('home.layouts.navigation')
-
+@if (session('success'))
+<div class="alert alert-success" id="success-alert">
+    {{ session('success') }}
+</div>
+@endif
 @include('home.layouts.header')
         <!-- Section-->
         <section class="py-5">
