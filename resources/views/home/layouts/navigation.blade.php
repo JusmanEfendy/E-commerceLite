@@ -50,7 +50,7 @@
                     @csrf
                     @php
                         $pesanan = \App\Models\Pesanan::where('user_id', optional(Auth::user())->id)
-                            ->where('status', 0)
+                            ->where('status', 'Unpaid')
                             ->first();
 
                         if ($pesanan && $pesanan->exists()) {

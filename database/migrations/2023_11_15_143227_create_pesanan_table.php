@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('tanggal');
             $table->integer('total_harga');
-            $table->string('status');
+            $table->enum('status', ['Unpaid', 'Paid'])->default('Unpaid');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
