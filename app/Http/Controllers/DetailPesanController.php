@@ -8,9 +8,15 @@ use App\Models\PesananDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class DetailPesanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index($id)
     {
         $title = 'Detail Pesanan';
@@ -67,6 +73,33 @@ class DetailPesanController extends Controller
             'total_harga' => $pesanan->total_harga + $barang->HargaBarang * $request->jumlahPesan
         ]);
         
-        return redirect()->route('homepage')->with('success', 'Barang berhasil ditambahkan ke keranjang');
+        return redirect()->route('checkout')->with('success', 'Produk berhasil ditambahkan ke keranjang');
+    }
+
+    public function checkout()
+    {
+        $title = 'Checkout barang Sekarang' ;
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
+
+        // validasi ketika pesanandetail kosong
+        $detailPesanan = PesananDetail::get();
+        if(empty($detailPesanan)) {
+            $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->where('pesan_id', $pesanan->id)->get();
+        }
+        
+        return view('home.keranjang', compact('pesanan', 'detailPesanan', 'title'));
+    }
+
+    public function delete($id)
+    {
+        $pesananDetail = PesananDetail::where('id', $id)->first();
+        $pesanan = Pesanan::where('id', $pesananDetail->pesan_id)->first();
+
+        $pesanan->total_harga -= $pesananDetail->total_harga;
+        $pesanan->update();
+
+        $pesananDetail->delete();
+
+        return redirect()->route('checkout')->with('success', 'produk dihapus');
     }
 }

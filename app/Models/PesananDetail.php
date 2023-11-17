@@ -15,4 +15,14 @@ class PesananDetail extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['kode_barang', 'pesan_id', 'jumlah', 'total_harga'];
+
+    public function barang() 
+    {
+        return $this->belongsTo('App\Models\Barang', 'kode_barang', 'KodeBarang');
+    }
+
+    public function pesanan() 
+    {
+        return $this->belongsTo('App\Models\Pesanan', 'pesan_id', 'id');
+    }
 }
