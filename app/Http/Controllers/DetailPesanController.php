@@ -8,7 +8,6 @@ use App\Models\PesananDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\FuncCall;
 
 class DetailPesanController extends Controller
 {
@@ -36,19 +35,19 @@ class DetailPesanController extends Controller
         }
 
         // cek validasi ketika user dengan id {id} dan sudah ada data dengan status 0
-        $cekPesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $cekPesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
         if(empty($cekPesanan)) {
             // simpan data ke tabel pesanan
             Pesanan::create([
                 'user_id' => Auth::user()->id,
                 'tanggal' => Carbon::now(),
-                'status' => 0,
+                'status' => 'Unpaid',
                 'total_harga' => 0
             ]);
         }   
 
         // simpan ke pesanan detail
-        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
 
         // cek detail pesanan
         $cekDetailPesanan = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('pesan_id', $pesanan->id)->first();
@@ -79,7 +78,7 @@ class DetailPesanController extends Controller
     public function checkout()
     {
         $title = 'Checkout barang Sekarang' ;
-        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
 
         // validasi ketika pesanandetail kosong
         $detailPesanan = PesananDetail::get();
