@@ -15,4 +15,14 @@ class Pesanan extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['user_id', 'tanggal', 'total_harga', 'status'];
+
+    public function user() 
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+
+    public function pesanan_detail()
+    {
+        return $this->hasMany('\App\Models\PesananDetail', 'pesan_id', 'id');
+    }
 }

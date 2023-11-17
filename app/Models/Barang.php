@@ -15,4 +15,9 @@ class Barang extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['KodeBarang', 'NamaBarang', 'HargaBarang', 'StokBarang', 'Gambar', 'DeskripsiBarang', 'Satuan'];
+
+    public function pesanan_detail()
+    {
+        return $this->hasMany('App\PesananDetail', 'KodeBarang', 'id');
+    }
 }

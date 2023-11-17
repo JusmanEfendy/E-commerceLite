@@ -36,9 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/shop/chart', function () {
-        return view('home.keranjang');
-    });
+    Route::get('/pesanan/keranjang', [DetailPesanController::class, 'checkout'])->name('checkout');
+    Route::delete('/pesanan/delete/{id}', [DetailPesanController::class, 'delete'])->name('checkout.delete');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

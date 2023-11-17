@@ -1,122 +1,91 @@
+<title>{{ $title }}</title>
 @include('home.layouts.navigation')
-    <div class="untree_co-section before-footer-section mt-5">
-        <div class="container">
-            <div class="row mb-5">
-                <form class="col-md-12" method="post">
-                    <div class="site-blocks-table">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="product-thumbnail">Image</th>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-total">Total</th>
-                                    <th class="product-remove">Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <img src="images/product-1.png" alt="Image" class="img-fluid">
-                                    </td>
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black">Product 1</h2>
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td>
-                                        <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                            style="max-width: 120px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-black decrease"
-                                                    type="button">&minus;</button>
-                                            </div>
-                                            <input type="text" class="form-control text-center quantity-amount"
-                                                value="1" placeholder=""
-                                                aria-label="Example text with button addon"
-                                                aria-describedby="button-addon1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-black increase"
-                                                    type="button">&plus;</button>
-                                            </div>
-                                        </div>
 
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <img src="images/product-2.png" alt="Image" class="img-fluid">
-                                    </td>
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black">Product 2</h2>
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td>
-                                        <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                            style="max-width: 120px;">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-black decrease"
-                                                    type="button">&minus;</button>
-                                            </div>
-                                            <input type="text" class="form-control text-center quantity-amount"
-                                                value="1" placeholder=""
-                                                aria-label="Example text with button addon"
-                                                aria-describedby="button-addon1">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-black increase"
-                                                    type="button">&plus;</button>
-                                            </div>
-                                        </div>
-
-                                    </td>
-                                    <td>$49.00</td>
-                                    <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+<div class="untree_co-section before-footer-section mt-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                @if (session('success'))
+                    <div class="alert alert-info" id="success-alert">
+                        {{ session('success') }}
                     </div>
-                </form>
+                @endif
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Produk</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Hapus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($detailPesanan as $data)
+                                <tr>
+                                    <th>
+                                        <img class="img-fluid" src="{{ asset('storage/' . $data->barang->Gambar) }}"
+                                            alt="" style="max-width: 80">
+                                    </th>
+                                    <td>{{ $data->barang->NamaBarang }}</td>
+                                    <td>Rp. {{ number_format($data->barang->HargaBarang) }}</td>
+                                    <td>{{ $data->jumlah }}</td>
+                                    <td>Rp. {{ number_format($data->total_harga) }}</td>
+                                    <td class="px-3">
+                                        <form action="{{ route('checkout.delete', $data->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="bi bi-trash-fill"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
 
-            <div class="container">
-                <div class="col-md-6 pl-5">
-                    <div class="justify-content-start">
-                        <div class="col-md-7">
-                            <div class="row">
-                                <div class="col-md-12 text-right border-bottom mb-5">
-                                    <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div class="col-md-6">
-                                    <span class="text-black">Total</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
+        <div class="row">
+            <div class="col-md-6 pl-md-5">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12 text-right border-bottom mb-5">
+                            <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <span class="text-black">Subtotal</span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong class="text-black">Rp.
+                                {{ isset($pesanan->total_harga) ? number_format($pesanan->total_harga) : 0 }}</strong>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <span class="text-black">Total</span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong class="text-black">Rp.
+                                {{ isset($pesanan->total_harga) ? number_format($pesanan->total_harga) : 0 }}</strong>
+                        </div>
+                    </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-outline-dark btn-lg py-3 mb-2"
-                                        onclick="window.location='checkout.html'">Checkout</button>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-outline-dark btn-lg py-3 mb-2"
+                                onclick="window.location='checkout.html'">Checkout</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 @include('home.layouts.footer')
