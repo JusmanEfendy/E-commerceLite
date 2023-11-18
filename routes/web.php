@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pesanan/keranjang', [DetailPesanController::class, 'checkout'])->name('checkout');
     Route::delete('/pesanan/delete/{id}', [DetailPesanController::class, 'delete'])->name('checkout.delete');
+
+    Route::post('confirm-checkout', [DetailPesanController::class, 'confirm'])->name('confirm.checkout');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
