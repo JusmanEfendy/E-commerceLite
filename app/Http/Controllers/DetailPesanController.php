@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,5 +101,24 @@ class DetailPesanController extends Controller
         $pesananDetail->delete();
 
         return redirect()->route('checkout')->with('success', 'produk dihapus');
+    }
+
+    public function confirm(Request $request)
+    {
+        // jika alamat dan telepon user tidak sama dengan di db maka perbarui
+        if(($request->alamat != Auth::user()->alamat) || ($request->telepon != Auth::user()->telepon)) {
+            $user = User::find(Auth::user()->id);
+
+            $datas = $request->validate([
+                'telepon' => 'required|numeric',
+                'alamat' => 'required'
+            ]);
+
+            $user->update([
+                'telepon' => $datas['telepon'],
+                'alamat' => $datas['alamat']
+            ]);
+        }
+        return view('checkout');
     }
 }
