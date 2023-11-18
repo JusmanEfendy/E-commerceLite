@@ -36,9 +36,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // HOMEPAGE
     Route::get('/pesanan/keranjang', [DetailPesanController::class, 'checkout'])->name('checkout');
     Route::delete('/pesanan/delete/{id}', [DetailPesanController::class, 'delete'])->name('checkout.delete');
-
     Route::post('confirm-checkout', [DetailPesanController::class, 'confirm'])->name('confirm.checkout');
 });
 

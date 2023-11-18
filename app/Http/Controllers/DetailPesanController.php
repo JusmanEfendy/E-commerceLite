@@ -105,6 +105,8 @@ class DetailPesanController extends Controller
 
     public function confirm(Request $request)
     {
+        $title = 'Konfirmasi Pembayaran';
+
         // jika alamat dan telepon user tidak sama dengan di db maka perbarui
         if(($request->alamat != Auth::user()->alamat) || ($request->telepon != Auth::user()->telepon)) {
             $user = User::find(Auth::user()->id);
@@ -119,6 +121,11 @@ class DetailPesanController extends Controller
                 'alamat' => $datas['alamat']
             ]);
         }
-        return view('checkout');
+
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
+
+        $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
+
+        return view('home.confirm-checkout', compact('title', 'pesanan', 'detailPesanan', 'request'));
     }
 }
