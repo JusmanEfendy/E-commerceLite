@@ -6,13 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    {{-- MIDTRANS SNAP --}}
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="{{ asset('bootstrap5/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('home/css/styles.css') }}" rel="stylesheet" />
+
+    {{-- JIKA AKSES DILOKAL  --}}
+    @if (request()->getHost() == 'localhost' && request()->getPort() == 8000)
+        <link href="{{ asset('bootstrap5/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ asset('home/css/styles.css') }}" rel="stylesheet" />
+    @else
+        <link href="{{ secure_asset('bootstrap5/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ secure_asset('home/css/styles.css') }}" rel="stylesheet" />
+    @endif
 
     <!-- jQuery -->
     <script src="{{ asset('template') }}/plugins/jquery/jquery.min.js"></script>
@@ -96,7 +108,6 @@
                             </a>
                         @endauth
                     </ul>
-
                 </form>
             </div>
         </div>
