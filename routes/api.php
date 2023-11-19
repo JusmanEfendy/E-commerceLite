@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailPesanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+ // AFTER PAYMENT MIDTRANS
+Route::post('after-payment', [DetailPesanController::class, 'callback'])->name('after.payment');
