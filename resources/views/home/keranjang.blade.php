@@ -104,6 +104,7 @@
                             <div class="col-md-6 text-right">
                                 <strong class="text-black">Rp.
                                     {{ isset($pesanan->total_harga) ? number_format($pesanan->total_harga) : 0 }}</strong>
+                                    {{-- {{ $pesana->total_harga }} --}}
                             </div>
                         </div>
     
