@@ -81,11 +81,10 @@ class DetailPesanController extends Controller
         $title = 'Checkout barang Sekarang' ;
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
 
-        // validasi ketika pesanandetail kosong
-        $detailPesanan = PesananDetail::get();
-        if(empty($detailPesanan)) {
-            $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->where('pesan_id', $pesanan->id)->get();
-        }
+        $detailPesanan = PesananDetail::whereHas('pesanan', function ($query) {
+            $query->where('user_id', Auth::user()->id)
+                ->where('status', 'Unpaid');
+        })->get();
         
         return view('home.keranjang', compact('pesanan', 'detailPesanan', 'title'));
     }
@@ -125,43 +124,6 @@ class DetailPesanController extends Controller
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
         $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
 
-        //SAMPLE REQUEST START HERE
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $pesanan->id,
-                'gross_amount' => $pesanan->total_harga,
-            ),
-            'customer_details' => array(
-                'first_name' => $pesanan->user->name,
-                'email' => $pesanan->user->email,
-                'phone' => $request->telepon,
-            ),
-        );
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('home.confirm-checkout', compact('title', 'pesanan', 'detailPesanan', 'request', 'snapToken'));
-    }
-
-    public function callback(Request $request)
-    {
-        $serverKey = config('midtrans.server_key');
-        // dd($serverKey);
-        $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
-
-        if($hashed == $request->signature_key){
-            if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
-                $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
-                $pesanan->update(['status' => 'Paid']);
-            }
-        }
+        return view('home.confirm-checkout', compact('title', 'pesanan', 'detailPesanan', 'request'));
     }
 }

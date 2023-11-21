@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AfterPaymentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     // HOMEPAGE
     Route::get('/pesanan/keranjang', [DetailPesanController::class, 'checkout'])->name('checkout');
     Route::delete('/pesanan/delete/{id}', [DetailPesanController::class, 'delete'])->name('checkout.delete');
-    Route::post('confirm-checkout', [DetailPesanController::class, 'confirm'])->name('confirm.checkout');
+    Route::post('confirm-checkout', [AfterPaymentController::class, 'afterPayment'])->name('confirm.checkout');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
