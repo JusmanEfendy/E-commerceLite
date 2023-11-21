@@ -81,7 +81,7 @@
                             <div class="col-md-6">
                                 <label for="alamat"><strong>Alamat <span style="color: red">*</span></strong></label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="alamat" rows="2" >{{ !empty(Auth::user()->alamat) ? Auth::user()->alamat : '' }}</textarea>
+                                    <textarea class="form-control" id="alamat" name="alamat" rows="2" >{{ !empty(Auth::user()->alamat) ? Auth::user()->alamat : '' }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-6 text-right">

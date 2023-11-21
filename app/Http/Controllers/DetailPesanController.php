@@ -21,7 +21,7 @@ class DetailPesanController extends Controller
     {
         $title = 'Detail Pesanan';
 
-        $barangs = Barang::paginate(4);
+        $barangs = Barang::paginate(10);
         $barang = Barang::where('KodeBarang', $id)->first();
         return view('home.detail', compact('barangs', 'barang', 'title'));
     }
@@ -154,11 +154,11 @@ class DetailPesanController extends Controller
     public function callback(Request $request)
     {
         $serverKey = config('midtrans.server_key');
-        dd($serverKey);
+        // dd($serverKey);
         $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
 
         if($hashed == $request->signature_key){
-            if($request->transaction_status == 'capture'){
+            if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
                 $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
                 $pesanan->update(['status' => 'Paid']);
             }
