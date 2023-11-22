@@ -44,12 +44,9 @@ class AfterPaymentController extends Controller
 
     public function callback(Request $request)
     {
-        $serverKey = config('midtrans.server_key');
-        // $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
-        // dd($request->transaction_status);
-            if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
-                $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
-                $pesanan->update(['status' => 'Paid']);
-            }
+        if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
+            $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
+            $pesanan->update(['status' => 'Paid']);
         }
+    }
 }
