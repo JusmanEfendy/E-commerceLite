@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use Illuminate\Http\Request;
@@ -46,7 +47,15 @@ class AfterPaymentController extends Controller
     {
         if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
             $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
+            $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
+            
+            foreach ($detailPesanan as $datas){
+                $barang = Barang::where('KodeBarang', $datas->kode_barang)->first();
+                $barang->update(['StokBarang' => $barang->StokBarang - $datas->jumlah]);
+            }
+            // dd($detailPesanan);
+
             $pesanan->update(['status' => 'Paid']);
-        }
+        }  
     }
 }
