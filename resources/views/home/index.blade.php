@@ -15,7 +15,12 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
+                            @if ($barang->StokBarang == 0)
+                                <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Habis</div>
+                            @else
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
+                            @endif
+                            
                             <!-- Product image-->
                             <img class="card-img-top" src="{{ asset('storage/' . $barang->Gambar) }}" alt="..." />
                             <!-- Product details-->

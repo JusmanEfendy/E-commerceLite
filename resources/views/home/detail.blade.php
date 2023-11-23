@@ -5,26 +5,31 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             {{-- <h3>{{ $barang->NamaBarang }}</h3> --}}
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('storage/' . $barang->Gambar) }}"
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 rounded shadow" src="{{ asset('storage/' . $barang->Gambar) }}"
                     alt="..." /></div>
             <div class="col-md-6">
                 <div class="small mb-1">Kode : {{ $barang->KodeBarang }}</div>
                 <h1 class="display-5 fw-bolder">{{ $barang->NamaBarang }}</h1>
                 <div class="fs-5 mb-5">
                     <span>Rp. {{ number_format($barang->HargaBarang, 0, ',', '.') }}</span>
-                    <span>| Stok: {{ $barang->StokBarang }}</span>
+                    <span>| Stok: {{ $barang->StokBarang <= 0 ? '0' : $barang->StokBarang }}</span>
                 </div>
                 <p class="lead">{{ $barang->DeskripsiBarang }}</p>
                 <div class="d-flex">
-                    <form action="" method="post">
-                        @csrf
-                        <input name="jumlahPesan" class="form-control text-center me-3" id="inputQuantity" type="number" value="1"
-                            style="max-width: 5rem" min="1" max="{{ $barang->StokBarang }}" required autofocus/>
-                        <button class="btn btn-outline-dark flex-shrink-0 mt-2" type="submit" id="addToCartBtn">
-                            <i class="bi-cart-fill me-1"></i>
-                            Add to cart
-                        </button>
-                    </form>
+                    @if ($barang->StokBarang == 0)
+                        <h2 style="color: black; opacity: 30%"><strong><i>Habis Terjual</i></strong></h2>
+                    @else
+                        <form action="" method="post">
+                            @csrf
+                            <input name="jumlahPesan" class="form-control text-center me-3" id="inputQuantity"
+                                type="number" value="1" style="max-width: 5rem" min="1"
+                                max="{{ $barang->StokBarang }}" required autofocus />
+                            <button class="btn btn-outline-dark flex-shrink-0 mt-3" type="submit" id="addToCartBtn">
+                                <i class="bi-cart-fill me-1"></i>
+                                Masukkan Keranjang
+                            </button>
+                        </form>
+                    @endif
 
                 </div>
             </div>
@@ -40,8 +45,13 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New
-                        </div>
+                        @if ($barang->StokBarang == 0)
+                            <div class="badge bg-danger text-white position-absolute"
+                                style="top: 0.5rem; right: 0.5rem">Habis</div>
+                        @else
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                New</div>
+                        @endif
                         <!-- Product image-->
                         <img class="card-img-top" src="{{ asset('storage/' . $barang->Gambar) }}" alt="..." />
                         <!-- Product details-->

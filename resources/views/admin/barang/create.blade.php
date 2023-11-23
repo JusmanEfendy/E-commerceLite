@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="StokBarang">Stok</label>
-                                <input type="number" class="form-control" id="StokBarang" name="StokBarang"
+                                <input type="number" class="form-control" id="StokBarang" name="StokBarang" min="0"
                                     placeholder="pcs/kg/box/dll" required>
                             </div>
                             <div class="form-group">
