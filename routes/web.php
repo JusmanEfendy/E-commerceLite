@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pesanan/keranjang', [DetailPesanController::class, 'checkout'])->name('checkout');
     Route::delete('/pesanan/delete/{id}', [DetailPesanController::class, 'delete'])->name('checkout.delete');
     Route::post('confirm-checkout', [AfterPaymentController::class, 'afterPayment'])->name('confirm.checkout');
+
+    // INFO PEMBAYARAN
+    Route::get('info-pembayaran', function() {return view('home.infoPembayaran');});
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

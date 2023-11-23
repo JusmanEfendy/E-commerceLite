@@ -33,7 +33,7 @@
                             <button id="pay-button" class="btn btn-success"><i class="bi bi-cash"></i> Bayar</button>
                         </div>
                         <!-- Snap Container -->
-                        <div class="col-md-6">                        
+                        <div class="col-md-6 mt-3">                        
                             <div style="border-radius: 10px;" id="snap-container"></div>
                         </div>
                     </div>
@@ -57,6 +57,7 @@
             embedId: 'snap-container',
             onSuccess: function(result) {
                 /* You may add your own implementation here */
+                window.location.href = '/info-pembayaran'
                 alert("payment success!");
                 console.log(result);
             },

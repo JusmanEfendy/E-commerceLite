@@ -35,7 +35,7 @@ class BarangController extends Controller
             'NamaBarang' => 'required|string|max:255',
             'HargaBarang' => 'required',
             'Gambar' => 'required|image|mimes:jpeg,jpg,png|file|max:2048',
-            'StokBarang' => 'required',
+            'StokBarang' => 'required|integer|min:0',
             'DeskripsiBarang' => 'nullable',
             'Satuan' => 'nullable',
         ]);
@@ -76,7 +76,7 @@ class BarangController extends Controller
             'NamaBarang' => 'required|string|max:255',
             'HargaBarang' => 'required',
             'Gambar' => 'required|image|mimes:jpeg,jpg,png|file|max:2048',
-            'StokBarang' => 'required',
+            'StokBarang' => 'required|integer|min:1',
             'DeskripsiBarang' => 'nullable',
             'Satuan' => 'nullable',
         ]);

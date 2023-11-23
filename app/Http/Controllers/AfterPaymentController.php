@@ -51,11 +51,14 @@ class AfterPaymentController extends Controller
             
             foreach ($detailPesanan as $datas){
                 $barang = Barang::where('KodeBarang', $datas->kode_barang)->first();
-                $barang->update(['StokBarang' => $barang->StokBarang - $datas->jumlah]);
+                $stokBaru = $barang->StokBarang - $datas->jumlah;
+                $stokBaru = max($stokBaru, 0);
+            
+                $barang->update(['StokBarang' => $stokBaru]);
             }
             // dd($detailPesanan);
 
             $pesanan->update(['status' => 'Paid']);
-        }  
+        }
     }
 }
