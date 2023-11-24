@@ -34,6 +34,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">Transaction</li>
+                <li class="nav-item">
+                    <a href="{{ url('transaksi') }}" class="nav-link {{ request()->is('transaksi*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-cash"> </i>
+                        <p>
+                            Transaksi
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">Keluar</li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">

@@ -8,7 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DetailPesanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PegawaiController;
-
+use App\Http\Controllers\TransaksiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +65,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
     Route::patch('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
     Route::delete('/pegawai/{id}/delete', [PegawaiController::class, 'destroy'])->name('pegawai.delete');
+
+    // TRANSAKSI ATAU PESANAN ROUTER
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 });
 
 require __DIR__.'/auth.php';
