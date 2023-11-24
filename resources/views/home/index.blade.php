@@ -22,7 +22,7 @@
                             @endif
                             
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{ asset('storage/' . $barang->Gambar) }}" alt="..." />
+                            <img class="card-img-top" height="125px" src="{{ asset('storage/' . $barang->Gambar) }}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -49,7 +49,6 @@
                         </div>
                     </div>
                     @endforeach
-                    
                 </div>
             </div>
         </section>
