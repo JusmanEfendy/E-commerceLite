@@ -52,7 +52,7 @@ Salin link / domain dari server yg digunakan
 Paste link tersebut di https://dashboard.sandbox.midtrans.com/settings/vtweb_configuration
 Klik update.
 ```
-hubungi pembuat jika mengalami masalah saat penginstalan dan konfigurasi (Jussy)[mailto:njhussrhiee0206s@gmail.com]
+hubungi pembuat jika mengalami masalah saat penginstalan dan konfigurasi [Jussy](https://www.instagram.com/jussy_ez)
 
 ## Admin credentials
 - **Email:** jussy@gmail.com
