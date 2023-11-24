@@ -52,7 +52,8 @@ Salin link / domain dari server yg digunakan
 Paste link tersebut di [Sandbox Midtrans](https://dashboard.sandbox.midtrans.com/settings/vtweb_configuration)
 Klik update.
 ```
-hubungi pembuat jika mengalami masalah saat penginstalan dan konfigurasi [Jussy](https://www.instagram.com/jussy_ez)
+hubungi pembuat jika mengalami masalah saat penginstalan dan konfigurasi.
+- Creator [Jussy](https://www.instagram.com/jussy_ez)
 
 ## Admin credentials
 - **Email:** jussy@gmail.com
