@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-12">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -23,18 +23,18 @@
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
+                            <a href="{{ route('barang') }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-12">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>Rp. {{ number_format($totalSemuaHarga, 0, ',', '.') }}</h3>
+                                <h3>Rp. {{ number_format($pemasukanBulanan, 0, ',', '.') }}</h3>
         
-                                <p>Total Harga Semua Barang</p>
+                                <p>Pemasukan Bulanan</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-12">
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
@@ -60,13 +60,13 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-12">
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3>{{ $totalTransaksi }}</h3>
         
-                                <p>Unique Visitors</p>
+                                <p>Total Transaksi</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
