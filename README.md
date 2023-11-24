@@ -34,6 +34,25 @@ php artisan migrate:fresh --seed
 ```
 That's it!
 
+## Konfigurasi Midtrans Payment Gateway
+
+Lakukan hal dibawah ini agar bisa menggunakan metode pembayaran saat checkout/bayar
+
+```
+Silahkan login ke https://midtrans.com dan ubah Environment ke Sandbox
+Pergi ke pengaturan kemudia access Keys
+Buat di file .env seperti dibawah ini !!!
+MIDTRANS_MERCHANT_ID=[isi dengan ID Merchant]
+MIDTRANS_CLIENT_KEY=[isi dengan Client Key]
+MIDTRANS_SERVER_KEY=[isi dengan Server Key]
+
+
+Jalankan Server ngrok/nginx/hosting (webhook / callback payment gateway harus publis)
+Salin link / domain dari server yg digunakan
+Paste link tersebut di https://dashboard.sandbox.midtrans.com/settings/vtweb_configuration
+Klik update.
+```
+hubungi pembuat jika mengalami masalah saat penginstalan dan konfigurasi (Jussy)[mailto:njhussrhiee0206s@gmail.com]
 
 ## Admin credentials
 - **Email:** jussy@gmail.com
