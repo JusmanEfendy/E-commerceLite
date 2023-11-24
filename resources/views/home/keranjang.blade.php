@@ -110,7 +110,7 @@
                         
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-outline-dark btn-lg py-3 mb-2">Checkout</button>
+                                <button type="submit" {{ !empty($pesanan) ? '' : 'disabled' }} class="btn btn-outline-dark btn-lg py-3 mb-2">Checkout</button>
                             </div>
                         </div>
                     </form>
