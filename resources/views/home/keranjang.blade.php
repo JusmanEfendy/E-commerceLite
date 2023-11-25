@@ -74,14 +74,14 @@
                             <div class="col-md-6">
                                 <label for="Telepon"><strong>No.Telp <span style="color: red">*</span></strong></label>
                                 <input type="number" name="telepon" class="form-control" id="Telepon"
-                                    aria-describedby="emailHelp" value="{{ !empty(Auth::user()->telepon) ? Auth::user()->telepon : '' }}" placeholder="ex:628xxxxxxxx"  autofocus>
+                                    aria-describedby="emailHelp" value="{{ !empty(Auth::user()->telepon) ? Auth::user()->telepon : '' }}" placeholder="ex:628xxxxxxxx" required  autofocus>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="alamat"><strong>Alamat <span style="color: red">*</span></strong></label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="2" >{{ !empty(Auth::user()->alamat) ? Auth::user()->alamat : '' }}</textarea>
+                                    <textarea class="form-control" id="alamat" name="alamat" rows="2" required >{{ !empty(Auth::user()->alamat) ? Auth::user()->alamat : '' }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-6 text-right">
@@ -110,7 +110,7 @@
                         
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" {{ $pesanan->total_harga === 0 ? 'disabled' : '' }} {{ !empty($pesanan) ? '' : 'disabled' }} class="btn btn-outline-dark btn-lg py-3 mb-2">Checkout</button>
+                                <button type="submit" {{ empty($pesanan->total_harga) ? 'disabled' : '' }} {{ !empty($pesanan) ? '' : 'disabled' }} class="btn btn-outline-dark btn-lg py-3 mb-2">Checkout</button>
                             </div>
                         </div>
                     </form>
