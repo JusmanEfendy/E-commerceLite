@@ -10,14 +10,20 @@
 - [Laravel Breeze](https://github.com/laravel/breeze)
 - [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum#main-content)
 - [Guzzle](https://github.com/guzzle/guzzle)
+- [Midtrans](https://docs.midtrans.com/reference)
 
 
 ## Features
 
 - AdminLTE template
+- Bootstrap template e-commerce
 - Authentication with Laravel Breeze
 - User & Roles management (two access rights [admin, client])
 - SweetAlert installed
+- Payment Gateway Midtrans
+- Checkout menu
+- Cart menu
+- Email verification mailtrap
 
 
 ## Installation 
