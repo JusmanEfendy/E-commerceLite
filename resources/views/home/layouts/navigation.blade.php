@@ -85,12 +85,14 @@
                                     Welcome, {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    @if (Auth::user()->role === 'admin')
-                                        <li><a class="dropdown-item" href="{{ route('dashboard') }}"><i
-                                                    class="bi bi-speedometer"></i> Dashboard</a></li>
-                                    @endif
                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                                class="bi bi-person"></i> Profile</a></li>
+                                        class="bi bi-person"></i> Profile</a></li>
+                                    <li>
+                                    @if (Auth::user()->role === 'admin')
+                                        <li><a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-speedometer"></i> Dashboard</a></li>
+                                    @endif
+                                        <li><a class="dropdown-item" href="{{ route('password.request') }}"><i class="bi bi-file-lock"></i> Lupa Password</a>
+                                        </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
