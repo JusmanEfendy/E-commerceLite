@@ -18,9 +18,21 @@ class DashboardController extends Controller
         $pegawai = Pegawai::count();
 
         // total transaksi dan pemasukan berdasarkan bulan ini 
-        $pemasukanBulanan = Pesanan::whereYear('tanggal', Carbon::now()->year)->whereMonth('tanggal', Carbon::now()->month)->sum('total_harga');
+        $jumlahPemasukanBulanan = Pesanan::whereYear('tanggal', Carbon::now()->year)->whereMonth('tanggal', Carbon::now()->month)->sum('total_harga');       
         $totalTransaksi = Pesanan::count();
 
-        return view('admin.dashboard.dashboard', compact('title', 'barang', 'pegawai', 'pemasukanBulanan', 'totalTransaksi'));
+        // chart menghitung pendapatan harian
+        $pemasukanBulanan = Pesanan::whereYear('tanggal', Carbon::now()->year)->whereMonth('tanggal', 11)->get();
+
+        $dailyRevenue = $pemasukanBulanan->groupBy(function ($date) {
+            return $date->created_at->format('d M');
+        })->map(function ($pemasukanBulanan) {
+            return $pemasukanBulanan->sum('total_harga');
+        });
+
+        $dailyRevenueLabels = $dailyRevenue->keys()->toJson();
+        $dailyRevenueData = $dailyRevenue->values()->toJson();
+
+        return view('admin.dashboard.dashboard', compact('title', 'barang', 'pegawai', 'jumlahPemasukanBulanan', 'totalTransaksi','dailyRevenueLabels', 'dailyRevenueData'));
     }
 }
