@@ -24,4 +24,3 @@
     </div>
 </div>
 </div>
-@include('home.layouts.footer')

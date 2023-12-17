@@ -23,7 +23,18 @@ class DetailPesanController extends Controller
 
         $barangs = Barang::paginate(10);
         $barang = Barang::where('KodeBarang', $id)->first();
+        
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
+        
+        // cek apakah keranjang user sudah ada atau kosong
+        if(!empty($pesanan)){
+            $pesananDetail = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('pesan_id', $pesanan->id)->first();
+
+            return view('home.detail', compact('barangs', 'barang', 'title', 'pesananDetail'));
+        }
+
         return view('home.detail', compact('barangs', 'barang', 'title'));
+        
     }
 
     public function pesan( Request $request, $id)
@@ -35,7 +46,7 @@ class DetailPesanController extends Controller
             return redirect('detail-pesanan/'. $id);
         }
 
-        // cek validasi ketika user dengan id {id} dan sudah ada data dengan status 0
+        // cek validasi ketika user dengan id {id} dan sudah ada data dengan status Unpaid
         $cekPesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
         if(empty($cekPesanan)) {
             // simpan data ke tabel pesanan
