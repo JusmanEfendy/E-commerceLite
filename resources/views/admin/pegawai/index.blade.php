@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Admin | Pegawai')
+
 @section('content')
 
     <div class="page-content">
