@@ -28,9 +28,10 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 
 Route::get('/detail-pesanan/{id}', [DetailPesanController::class, 'index'])->name('detail.pesanan');
 Route::post('/detail-pesanan/{id}', [DetailPesanController::class, 'pesan'])->name('detail.pesanan');
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboardv2', function () {
+//     return view('admin.dashboard.dashboard');
+// })->name('dashboardv2');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
