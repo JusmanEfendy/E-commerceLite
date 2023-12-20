@@ -111,7 +111,7 @@ class BarangController extends Controller
         Storage::delete($del->Gambar);
 
         $barang->destroy($id);
-        // return redirect()->route('barang')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('barang')->with('success', 'Barang berhasil dihapus');
     }
 
     // function untuk mengformat angka menjadi kata

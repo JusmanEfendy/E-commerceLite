@@ -1,15 +1,18 @@
-@include('layouts.header')
+@extends('layouts.main')
 
-@include('layouts.navbar')
+@section('title', 'Admin | Tambah Data')
 
-@include('layouts.sidemenu')
+@section('content')
+    <div class="page-content">
 
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-2">Tambah Pegawai</h1>
-                @if ($errors->any())
+        <nav class="page-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Tambah Product
+                </li>
+            </ol>
+            @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -18,53 +21,59 @@
                                 </ul>
                             </div>
                         @endif
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Masukkan Data Pegawai</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form action="{{ route('pegawai.create') }}" method="post" enctype="multipart/form-data">
+        </nav>
+
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+                    <h6 class="card-title">Tambah Product</h6>
+
+                    <form class="forms-sample" action="{{ route('pegawai.create') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="KodePegawai">Kode Pegawai</label>
+                        <div class="row mb-3">
+                            <label for="KodePegawai" class="col-sm-3 col-form-label">Kode Pegawai</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="KodePegawai" name="KodePegawai"
-                                    placeholder="Kode Pegawai" readonly>
+                                    placeholder="Kode Barang" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="NamaPegawai">Nama</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="NamaPegawai" class="col-sm-3 col-form-label">Nama</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="NamaPegawai" name="NamaPegawai"
-                                    placeholder="Nama Pegawai" required autofocus    >
+                                    placeholder="Nama Lengkap...">
                             </div>
-                            <div class="form-group">
-                                <label for="Jabatan">Jabatan</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Jabatan" class="col-sm-3 col-form-label">Jabatan</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="Jabatan" name="Jabatan"
-                                    placeholder="Jabatan" required>
+                                    placeholder="Jabatan">
                             </div>
-                            <div class="form-group">
-                                <label for="NoTeleponPegawai">No Telp</label>
-                                <input type="number" class="form-control" id="NoTeleponPegawai" name="NoTeleponPegawai"
-                                    placeholder="example: 6283123456789" required>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="NoTeleponPegawai" class="col-sm-3 col-form-label" >No. Telp</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="NoTeleponPegawai" name="NoTeleponPegawai" placeholder="ex: 628xxxxxx">
                             </div>
-                            <div class="mb-3">
-                                <label for="Gambar" class="form-label">Masukkan Gambar</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="Gambar">Masukkan Gambar</label>
+                            <div class="col-sm-9">
                                 <img class="img-view img-fluid col-sm-5 mb-3" alt="">
                                 <input class="form-control" type="file" id="Gambar" name="Gambar" onchange="viewGambar()">
                             </div>
                         </div>
-                        <!-- /.card-body -->                     
-
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <a href="{{ route('pegawai') }}" class="btn btn-secondary">Cancel</a>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
-@include('layouts.footer')
+@endsection
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

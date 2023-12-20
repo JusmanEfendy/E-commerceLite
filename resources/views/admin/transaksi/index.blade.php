@@ -125,35 +125,3 @@
 </div>
 
 @include('layouts.footer')
-
-<script>
-    $(document).ready(function() {
-        // sweetalert ketika inign menghapus data
-        $('.delete').click(function(e) {
-            e.preventDefault()
-            const namaPegawai = $(this).data('namapegawai')
-            let button = $(this)
-            let form = button.parent('form')
-            let ok = false
-            Swal.fire({
-                title: 'Apakah anda yakin ingin menghapus?',
-                text: `${namaPegawai} akan dihapus permanent`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Iya, Hapus!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    ok = true; // Setel ok ke true jika pengguna mengklik "Yes"
-                    form.submit(); // Kirim formulir
-
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
-            })
-        })
-</script>
