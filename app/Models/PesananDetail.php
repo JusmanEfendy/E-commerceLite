@@ -14,7 +14,7 @@ class PesananDetail extends Model
     protected $table = 'pesanan_detail';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['kode_barang', 'pesan_id', 'jumlah', 'total_harga'];
+    protected $fillable = ['kode_barang', 'pesan_id', 'order_id', 'jumlah', 'total_harga'];
 
     public function barang() 
     {
@@ -24,5 +24,10 @@ class PesananDetail extends Model
     public function pesanan() 
     {
         return $this->belongsTo('App\Models\Pesanan', 'pesan_id', 'id');
+    }
+
+    public function order() 
+    {
+        return $this->belongsTo('App\Models\Pesanan', 'order_id', 'order_id');
     }
 }
