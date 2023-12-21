@@ -28,7 +28,7 @@ class DetailPesanController extends Controller
         
         // cek apakah keranjang user sudah ada atau kosong
         if(!empty($pesanan)){
-            $pesananDetail = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('pesan_id', $pesanan->id)->first();
+            $pesananDetail = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('order_id', $pesanan->order_id)->first();
 
             return view('home.detail', compact('barangs', 'barang', 'title', 'pesananDetail'));
         }
@@ -53,6 +53,7 @@ class DetailPesanController extends Controller
             Pesanan::create([
                 'user_id' => Auth::user()->id,
                 'tanggal' => Carbon::now(),
+                'order_id' => Carbon::now()->format('YmdHisv'),
                 'status' => 'Unpaid',
                 'total_harga' => 0
             ]);
@@ -62,16 +63,17 @@ class DetailPesanController extends Controller
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
 
         // cek detail pesanan
-        $cekDetailPesanan = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('pesan_id', $pesanan->id)->first();
+        $cekDetailPesanan = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('order_id', $pesanan->order_id)->first();
         if(empty($cekDetailPesanan)) {
             PesananDetail::create([
                 'kode_barang' => $barang->KodeBarang,
                 'pesan_id' => $pesanan->id,
+                'order_id' => $pesanan->order_id,
                 'jumlah' => $request->jumlahPesan,
                 'total_harga' => $barang->HargaBarang * $request->jumlahPesan
             ]);
         }else {
-            $detailPesanan = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('pesan_id', $pesanan->id)->first();
+            $detailPesanan = PesananDetail::where('kode_barang', $barang->KodeBarang)->where('order_id', $pesanan->order_id)->first();
             $hargaBaru = $barang->HargaBarang * $request->jumlahPesan;
 
             $detailPesanan->update([
@@ -103,7 +105,7 @@ class DetailPesanController extends Controller
     public function delete($id)
     {
         $pesananDetail = PesananDetail::where('id', $id)->first();
-        $pesanan = Pesanan::where('id', $pesananDetail->pesan_id)->first();
+        $pesanan = Pesanan::where('order_id', $pesananDetail->order_id)->first();
 
         $pesanan->total_harga -= $pesananDetail->total_harga;
         $pesanan->update();
@@ -111,30 +113,5 @@ class DetailPesanController extends Controller
         $pesananDetail->delete();
 
         return redirect()->route('checkout')->with('success', 'produk dihapus');
-    }
-
-    public function confirm(Request $request)
-    {
-        $title = 'Konfirmasi Pembayaran';
-
-        // jika alamat dan telepon user tidak sama dengan di db maka perbarui
-        if(($request->alamat != Auth::user()->alamat) || ($request->telepon != Auth::user()->telepon)) {
-            $user = User::find(Auth::user()->id);
-
-            $datas = $request->validate([
-                'telepon' => 'required|numeric',
-                'alamat' => 'required'
-            ]);
-
-            $user->update([
-                'telepon' => $datas['telepon'],
-                'alamat' => $datas['alamat']
-            ]);
-        }
-
-        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
-        $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
-
-        return view('home.confirm-checkout', compact('title', 'pesanan', 'detailPesanan', 'request'));
     }
 }
