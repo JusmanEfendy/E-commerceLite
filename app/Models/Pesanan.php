@@ -14,7 +14,7 @@ class Pesanan extends Model
     protected $table = 'pesanan';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['user_id', 'tanggal', 'total_harga', 'status'];
+    protected $fillable = ['user_id', 'tanggal', 'order_id', 'total_harga', 'status'];
 
     public function user() 
     {
@@ -24,5 +24,10 @@ class Pesanan extends Model
     public function pesanan_detail()
     {
         return $this->hasMany('\App\Models\PesananDetail', 'pesan_id', 'id');
+    }
+
+    public function order_detail()
+    {
+        return $this->hasMany('\App\Models\PesananDetail', 'order_id', 'order_id');
     }
 }

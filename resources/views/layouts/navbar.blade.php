@@ -1,143 +1,253 @@
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/') }}" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+<nav class="navbar">
+    <a href="#" class="sidebar-toggler">
+        <i data-feather="menu"></i>
+    </a>
+    <div class="navbar-content">
+        <form class="search-form">
+            <div class="input-group">
+                <div class="input-group-text">
+                    <i data-feather="search"></i>
+                </div>
+                <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
+            </div>
+        </form>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i data-feather="grid"></i>
+                </a>
+                <div class="dropdown-menu p-0" aria-labelledby="appsDropdown">
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                        <p class="mb-0 fw-bold">Web Apps</p>
+                        <a href="javascript:;" class="text-muted">Edit</a>
                     </div>
-                </li>
-
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="{{ asset('template') }}/dist/img/user1-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="{{ asset('template') }}/dist/img/user8-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="{{ asset('template') }}/dist/img/user3-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    <div class="row g-0 p-1">
+                        <div class="col-3 text-center">
+                            <a href="pages/apps/chat.html"
+                                class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="message-square" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Chat</p>
+                            </a>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="pages/apps/calendar.html"
+                                class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="calendar" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Calendar</p>
+                            </a>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="pages/email/inbox.html"
+                                class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="mail" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Email</p>
+                            </a>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="pages/general/profile.html"
+                                class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="instagram" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Profile</p>
+                            </a>
+                        </div>
                     </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                        <a href="javascript:;">View all</a>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true"
-                        href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i data-feather="mail"></i>
+                </a>
+                <div class="dropdown-menu p-0" aria-labelledby="messageDropdown">
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                        <p>9 New Messages</p>
+                        <a href="javascript:;" class="text-muted">Clear all</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div class="me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="me-4">
+                                    <p>Leonardo Payne</p>
+                                    <p class="tx-12 text-muted">Project status</p>
+                                </div>
+                                <p class="tx-12 text-muted">2 min ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div class="me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="me-4">
+                                    <p>Carl Henson</p>
+                                    <p class="tx-12 text-muted">Client meeting</p>
+                                </div>
+                                <p class="tx-12 text-muted">30 min ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div class="me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="me-4">
+                                    <p>Jensen Combs</p>
+                                    <p class="tx-12 text-muted">Project updates</p>
+                                </div>
+                                <p class="tx-12 text-muted">1 hrs ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div class="me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="me-4">
+                                    <p>Amiah Burton</p>
+                                    <p class="tx-12 text-muted">Project deatline</p>
+                                </div>
+                                <p class="tx-12 text-muted">2 hrs ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div class="me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="me-4">
+                                    <p>Yaretzi Mayo</p>
+                                    <p class="tx-12 text-muted">New record</p>
+                                </div>
+                                <p class="tx-12 text-muted">5 hrs ago</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                        <a href="javascript:;">View all</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i data-feather="bell"></i>
+                    <div class="indicator">
+                        <div class="circle"></div>
+                    </div>
+                </a>
+                <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                        <p>6 New Notifications</p>
+                        <a href="javascript:;" class="text-muted">Clear all</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <i class="icon-sm text-white" data-feather="gift"></i>
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>New Order Recieved</p>
+                                <p class="tx-12 text-muted">30 min ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <i class="icon-sm text-white" data-feather="alert-circle"></i>
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>Server Limit Reached!</p>
+                                <p class="tx-12 text-muted">1 hrs ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <img class="wd-30 ht-30 rounded-circle"
+                                    src="https://via.placeholder.com/30x30" alt="userr">
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>New customer registered</p>
+                                <p class="tx-12 text-muted">2 sec ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <i class="icon-sm text-white" data-feather="layers"></i>
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>Apps are ready for update</p>
+                                <p class="tx-12 text-muted">5 hrs ago</p>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <i class="icon-sm text-white" data-feather="download"></i>
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>Download completed</p>
+                                <p class="tx-12 text-muted">6 hrs ago</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                        <a href="javascript:;">View all</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                        alt="profile">
+                </a>
+                <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
+                    <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
+                        <div class="mb-3">
+                            <img class="wd-80 ht-80 rounded-circle"
+                                src="https://via.placeholder.com/80x80" alt="">
+                        </div>
+                        <div class="text-center">
+                            <p class="tx-16 fw-bolder">{{ Auth::user()->name }}</p>
+                            <p class="tx-12 text-muted">{{ Auth::user()->email }}</p>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled p-1">
+                        <li class="dropdown-item py-2">
+                            <a href="{{ url('profile') }}" class="text-body ms-0">
+                                <i class="me-2 icon-md" data-feather="user"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item py-2">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a class="nav-link d-inline" href="keluar"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                     <i class="me-2 icon-md" data-feather="log-out"></i>
+                                     <span class="text-white">Log Out</span>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

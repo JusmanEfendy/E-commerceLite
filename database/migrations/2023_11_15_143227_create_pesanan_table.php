@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->string('order_id')->unique()->nullable();
             $table->date('tanggal');
             $table->integer('total_harga');
             $table->enum('status', ['Unpaid', 'Paid'])->default('Unpaid');

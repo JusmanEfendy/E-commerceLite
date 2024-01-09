@@ -1,18 +1,18 @@
-@include('layouts.header')
+@extends('layouts.main')
 
-{{-- @include('layouts.preloader') --}}
+@section('title', 'Admin | Tambah Data')
 
-@include('layouts.navbar')
+@section('content')
+    <div class="page-content">
 
-@include('layouts.sidemenu')
-
-
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-2">Tambah Barang</h1>
-                @if ($errors->any())
+        <nav class="page-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Tambah Product
+                </li>
+            </ol>
+            @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -21,69 +21,69 @@
                                 </ul>
                             </div>
                         @endif
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Masukkan Barang</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form action="{{ route('barang.create') }}" method="post" enctype="multipart/form-data">
+        </nav>
+
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+                    <h6 class="card-title">Tambah Product</h6>
+
+                    <form class="forms-sample" action="{{ route('barang.create') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="KodeBarang">Kode Barang</label>
+                        <div class="row mb-3">
+                            <label for="KodeBarang" class="col-sm-3 col-form-label">Kode Barang</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="KodeBarang" name="KodeBarang"
                                     placeholder="Kode Barang" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="NamaBarang">Barang</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="NamaBarang" class="col-sm-3 col-form-label">Product</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="NamaBarang" name="NamaBarang"
-                                    placeholder="Nama Barang" required autofocus    >
+                                    placeholder="Product..." autofocus>
                             </div>
-                            <div class="form-group">
-                                <label for="HargaBarang">Harga</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="HargaBarang" class="col-sm-3 col-form-label">Harga</label>
+                            <div class="col-sm-9">
                                 <input type="number" class="form-control" id="HargaBarang" name="HargaBarang"
-                                    placeholder="Rp..." required>
+                                    placeholder="Harga Product">
                             </div>
-                            <div class="form-group">
-                                <label for="Satuan" hidden>Satuan</label>
-                                <input type="text" class="form-control" id="Satuan" name="Satuan"
-                                    placeholder="" hidden>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="StokBarang" class="col-sm-3 col-form-label" >Stok </label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="StokBarang" name="StokBarang" placeholder="pcs">
                             </div>
-                            <div class="form-group">
-                                <label for="StokBarang">Stok</label>
-                                <input type="number" class="form-control" id="StokBarang" name="StokBarang" min="0"
-                                    placeholder="pcs/kg/box/dll" required>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="DeskripsiBarang" class="col-sm-3 col-form-label">Example textarea</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="DeskripsiBarang" placeholder="Deskripsi..." name="DeskripsiBarang" rows="4"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label>Deskripsi</label>
-                                <textarea name="DeskripsiBarang" class="form-control" rows="3" name="DeskripsiBarang" placeholder="Deskripsi ..."></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="Gambar" class="form-label">Masukkan Gambar</label>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label" for="Gambar">Masukkan Gambar</label>
+                            <div class="col-sm-9">
                                 <img class="img-view img-fluid col-sm-5 mb-3" alt="">
                                 <input class="form-control" type="file" id="Gambar" name="Gambar" onchange="viewGambar()">
                             </div>
-                            
                         </div>
-                        <!-- /.card-body -->                     
-
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <a href="{{ route('barang') }}" class="btn btn-secondary">Cancel</a>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
-@include('layouts.footer')
+@endsection
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let kodeBarang = 'BRG' + Math.floor(Math.random() * 10000).toString().padStart(5, '0');
         document.getElementById('KodeBarang').value = kodeBarang;
     })
-    
 </script>
-

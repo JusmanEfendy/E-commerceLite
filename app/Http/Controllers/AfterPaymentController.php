@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pesanan;
 use App\Models\PesananDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,24 @@ class AfterPaymentController extends Controller
     public function afterPayment(Request $request) 
     {
         $title = "Konfirmasi Pembayaran";
+
+        // dd($request->telepon);
+        if(($request->alamat != Auth::user()->alamat) || ($request->telepon != Auth::user()->telepon)) {
+            $user = User::find(Auth::user()->id);
+
+            $datas = $request->validate([
+                'telepon' => 'required|numeric',
+                'alamat' => 'required'
+            ]);
+
+            $user->update([
+                'telepon' => $datas['telepon'],
+                'alamat' => $datas['alamat']
+            ]);
+        }
+
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', 'Unpaid')->first();
-        $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
+        $detailPesanan = PesananDetail::where('order_id', $pesanan->order_id)->get();
 
         //SAMPLE REQUEST START HERE
         // Set your Merchant Server Key
@@ -28,7 +45,7 @@ class AfterPaymentController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $pesanan->id,
+                'order_id' => $pesanan->order_id,
                 'gross_amount' => $pesanan->total_harga,
             ),
             'customer_details' => array(
@@ -45,9 +62,13 @@ class AfterPaymentController extends Controller
 
     public function callback(Request $request)
     {
+        // dd($request);
         if($request->transaction_status == 'capture' || $request->transaction_status == 'settlement'){
-            $pesanan = Pesanan::where('id', $request->order_id)->where('status', 'Unpaid')->first();
-            $detailPesanan = PesananDetail::where('pesan_id', $pesanan->id)->get();
+
+            // dd('berhasil');
+            $pesanan = Pesanan::where('order_id', $request->order_id)->where('status', 'Unpaid')->first();
+            // dd($pesanan);
+            $detailPesanan = PesananDetail::where('order_id', $pesanan->order_id)->get();
             
             foreach ($detailPesanan as $datas){
                 $barang = Barang::where('KodeBarang', $datas->kode_barang)->first();

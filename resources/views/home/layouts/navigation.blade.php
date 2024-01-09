@@ -67,7 +67,7 @@
                             ->first();
 
                         if ($pesanan && $pesanan->exists()) {
-                            $notif = \App\Models\PesananDetail::where('pesan_id', $pesanan->id)->count();
+                            $notif = \App\Models\PesananDetail::where('order_id', $pesanan->order_id)->count();
                         }
                     @endphp
 

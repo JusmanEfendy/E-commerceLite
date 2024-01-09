@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pesanan_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode_barang');
+            $table->string('order_id');
             $table->unsignedBigInteger('pesan_id');
             $table->integer('jumlah');
             $table->integer('total_harga');
@@ -21,6 +22,7 @@ return new class extends Migration
 
             $table->foreign('kode_barang')->references('KodeBarang')->on('barang');
             $table->foreign('pesan_id')->references('id')->on('pesanan');
+            $table->foreign('order_id')->references('order_id')->on('pesanan');
         });
     }
 
