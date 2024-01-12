@@ -9,7 +9,7 @@
         </li>
         <li class="nav-item nav-category">Data Toko</li>
         <li class="nav-item">
-            <a href="{{ route('barang') }}" class="nav-link">
+            <a href="{{ route('produk') }}" class="nav-link">
                 <i class="link-icon" data-feather="shopping-cart"></i>
                 <span class="link-title">Product</span>
             </a>

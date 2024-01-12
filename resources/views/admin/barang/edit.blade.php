@@ -81,4 +81,3 @@
         </div>
     </div>
 @endsection
-</script>

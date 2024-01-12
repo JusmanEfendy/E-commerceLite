@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DetailPesanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,14 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     // TRANSAKSI ATAU PESANAN ROUTER
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+
+    // PRODUK ROUTER
+    Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
+    Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
+    Route::post('/produk/create', [ProdukController::class, 'store'])->name('produk.create');
+    Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+
+    Route::post('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
 });
 
 require __DIR__.'/auth.php';
