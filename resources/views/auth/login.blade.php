@@ -47,11 +47,11 @@
                                             <div>
                                                 <button type="submit"
                                                     class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</button>
-                                                <button type="button"
+                                                {{-- <button type="button"
                                                     class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
                                                     <i class="btn-icon-prepend" data-feather="globe"></i>
                                                     Login with google
-                                                </button>
+                                                </button> --}}
                                             </div>
                                             <a href="{{ route('register') }}" class="d-block mt-3 text-muted">Not a user? Sign
                                                 up</a>

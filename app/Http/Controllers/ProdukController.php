@@ -11,7 +11,7 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Produk::orderBy('nama_produk', 'ASC')->paginate(5);
+        $produk = Produk::orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.produk.index', compact('produk'));
     }
@@ -50,10 +50,39 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
-        // dd($id);
         $produk = Produk::where('kode_produk', $id)->first();
-        // dd($produk);
-        return view('admin.produk.edit', compact('produk'));
+        $status = StatusProduk::get();
+        $kelompok = KelompokProduk::get();
+
+        return view('admin.produk.edit', compact('produk', 'status', 'kelompok'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $produk = Produk::where('kode_produk', $id)->first();
+        
+        $request->validate([
+            'kode_produk' => 'required|max:12',
+            'nama_produk' => 'required|max:30',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
+            'kode_status' => 'required',
+            'kode_kelompok' => 'required',
+            'stok' => 'required|integer|min:0',
+        ]);
+
+        $produk->update([
+            'kode_produk' => $request->kode_produk,
+            'nama_produk' => $request->nama_produk,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'kode_status' => $request->kode_status,
+            'kode_kelompok' => $request->kode_kelompok,
+            'stok' => $request->stok,
+        ]);
+        
+        return redirect()->route('produk')->with('success', 'Produk berhasil diubah');
     }
 
     public function search(Request $request)

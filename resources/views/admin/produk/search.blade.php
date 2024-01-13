@@ -48,14 +48,6 @@
                                             <a href="{{ route('produk.edit', $data->kode_produk) }}" class="btn btn-info btn-icon btn-sm">
                                                 <i class="link-icon " data-feather="edit-3"></i>
                                             </a>
-                                            <form action="" method="post" class="d-inline">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-icon btn-sm delete"
-                                                    data-namabarang="{{ $data->nama_produk }}">
-                                                    <i class="link-icon " data-feather="trash-2"></i>
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -63,8 +55,8 @@
                                 </tbody>
                             </table>
                         @else
-                            <p class="text-center mx-auto">Belum ada data.</p>
-                            <a href="{{ route('produk.create') }}">tambahkan data baru</a>
+                            <p class="text-center mx-auto">Tidak Ada Hasil Pencarian .</p>
+                            <a href="{{ route('produk.create') }}">Tambahkan Data Baru</a>
                         @endif
                     </div>
                 </div>

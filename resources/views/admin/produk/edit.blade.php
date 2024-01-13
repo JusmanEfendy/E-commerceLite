@@ -27,8 +27,9 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form class="forms-sample" action="{{ route('produk.create') }}" method="post">
+                    <form class="forms-sample" action="{{ route('produk.update', $produk->kode_produk) }}" method="post">
                         @csrf
+                        @method('PATCH')
                         <div class="row mb-3">
                             <label for="kode_produk" class="col-sm-2 col-form-label">Kode Produk</label>
                             <div class="col-sm-10">
@@ -60,8 +61,8 @@
                                     <option selected disabled>Pilih Status Produk</option>
                                     @if (isset($status))
                                         @foreach ($status as $data)
-                                            <option value="{{ $data->kode_status }}">
-                                                {{ $data->status }}</option>
+                                        <option {{ $produk->kode_status == $data->kode_status ? 'selected' : '' }} value="{{ $data->kode_status }}">
+                                            {{ $data->status }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -72,7 +73,8 @@
                                     <option selected disabled>Pilih Kelompok Produk</option>
                                     @if (isset($kelompok))
                                         @foreach ($kelompok as $data)
-                                            <option value="">{{ $data->kelompok }}</option>
+                                        <option {{ $produk->kode_kelompok == $data->kode_kelompok ? 'selected' : '' }} value="{{ $data->kode_kelompok }}">
+                                            {{ $data->kelompok }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -81,7 +83,7 @@
                         <div class="row mb-3">
                             <label for="stok" class="col-sm-2 col-form-label" >Stok </label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="stok" name="stok" placeholder="pcs">
+                                <input type="number" class="form-control" id="stok" name="stok" value="{{ $produk->stok }}" placeholder="pcs">
                             </div>
                             <div class="col-sm-6 mt-2 d-none d-sm-inline">
                                 /pcs

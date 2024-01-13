@@ -16,12 +16,6 @@
                     Data Toko
                 </li>
             </ol>
-            <div class="ml-auto">
-                <form action="{{ route('barang') }}" method="get">
-                    <input type="search" id="search" name="search" class="form-control float-right"
-                    placeholder="Search" autofocus>
-                </form>   
-            </div>
         </nav>
 
         <div class="col-md-12 grid-margin stretch-card">
@@ -47,20 +41,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($barangs as $i => $barang) --}}
+                                    @foreach ($produk as $i => $data)
                                         <tr>
-                                                <form action="" method="post"
+                                            <td>{{ $i + $produk->firstItem() }}</td>
+                                            <td>{{ $data->kode_produk }}</td>
+                                            <td>{{ $data->nama_produk }}</td>
+                                            <td>{{ number_format($data->harga_beli, 0, ',', '.') }}</td>
+                                            <td>{{ number_format($data->harga_jual, 0, ',', '.') }}</td>
+                                            <td>{{ $data->stok }}</td>
+                                            <td>
+                                                <a href="{{ route('produk.edit', $data->kode_produk) }}" class="btn btn-info btn-icon btn-sm">
+                                                    <i class="link-icon " data-feather="edit-3"></i>
+                                                </a>
+                                                <form action="{{ route('produk.delete', $data->kode_produk) }}" method="post"
                                                     class="d-inline">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger btn-icon btn-sm delete"
-                                                        data-namabarang="">
+                                                        data-namabarang="{{ $data->nama_produk }}">
                                                         <i class="link-icon " data-feather="trash-2"></i>
                                                     </button>
                                                 </form>
                                             </td>
                                         </tr>
-                                    {{-- @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         @else

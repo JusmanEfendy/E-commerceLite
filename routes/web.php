@@ -76,6 +76,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/produk/create', [ProdukController::class, 'store'])->name('produk.create');
     Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+    Route::patch('/produk/{id}/update', [ProdukController::class, 'update'])->name('produk.update');
+    Route::patch('/produk/{id}/delete', [ProdukController::class, 'destroy'])->name('produk.delete');
 
     Route::post('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
 });
